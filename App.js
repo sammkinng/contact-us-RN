@@ -100,6 +100,7 @@ const App = () => {
       body: `<p>Name:  ${data.name}</p>
       <p>Phone no:   ${data.phone}</p>
       <p>Message:  ${data.msg}</p>
+
       `,
     })
     if (query.length) {
@@ -131,9 +132,6 @@ const App = () => {
       <StatusBar barStyle='light-content' />
       <ScrollView contentInsetAdjustmentBehavior='automatic'
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          alignItems: 'center',
-        }}
       >
         <ImageBackground
           source={images.bg}
@@ -154,6 +152,7 @@ const App = () => {
           style={{
             width: '100%',
             padding: 20,
+            alignItems: 'center'
           }}>
           <FormInput
             labelValue={data.name}
@@ -254,10 +253,19 @@ const App = () => {
             buttonTitle={'Send'}
             onPress={() => {
               if (data.valid_mail && data.valid_msg && data.valid_name && data.valid_phone) {
-                send_email().then(() => {
-                  showToastSuccess()
-                  // console.log('Email sent sucessfully!')
-                })
+                let cond1 = data.phone.trim().length > 0
+                let cond2 = data.mail.trim().length > 0
+                let cond3 = data.name.trim().length > 0
+                let cond4 = data.msg.trim().length > 0
+                if (cond1 && cond2 && cond3 && cond4) {
+                  send_email().then(() => {
+                    showToastSuccess()
+                    // console.log('Email sent sucessfully!')
+                  })
+                }
+                else {
+                  showToastError()
+                }
               } else {
                 showToastError()
                 // console.log('Please fill all reqd fields')
