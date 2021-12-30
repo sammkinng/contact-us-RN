@@ -131,28 +131,16 @@ const App = () => {
       <StatusBar barStyle='light-content' />
       <ScrollView contentInsetAdjustmentBehavior='automatic'
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ alignItems: 'center' }}
-      >
-        {/* <View style={{
-          backgroundColor: Colors.primary,
-          width: '100%',
-          height: 150,
+        contentContainerStyle={{
           alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: Sizes.radius,
-          marginBottom: 16 * 2
-        }}>
-          <Text style={{
-            fontSize: Sizes.largeTitle,
-            color: Colors.white,
-          }}>Contact us</Text>
-        </View> */}
+        }}
+      >
         <ImageBackground
           source={images.bg}
           resizeMode='cover'
           style={{
             width: '100%',
-            height: Sizes.height / 2,
+            height: Sizes.height / 3,
             alignItems: 'center',
           }} >
           <Text style={{
@@ -160,115 +148,125 @@ const App = () => {
             fontSize: Sizes.h2
           }}>Contact us</Text>
         </ImageBackground>
-        <FormInput
-          labelValue={data.name}
-          onChangeText={(val) => { validate_name(val) }}
-          placeholderText="Name"
-          keyboardType="default"
-          autoCapitalize="none"
-          autoCorrect={false}
-        >
-          <Image
-            source={icons.name}
-            resizeMode="contain"
-            style={{
-              width: 25,
-              height: 25,
-              tintColor: Colors.primary
-            }}
-          />
-        </FormInput>
-        {!data.valid_name && <Text style={styles.red}>
-          This field is required
-        </Text>}
-        <FormInput
-          labelValue={data['mail']}
-          onChangeText={(userEmail) => { validate_mail(userEmail) }}
-          placeholderText="Email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-        >
-          <Image
-            source={icons.mail}
-            resizeMode="contain"
-            style={{
-              width: 25,
-              height: 25,
-              tintColor: Colors.primary
-            }}
-          />
-        </FormInput>
-        {!data.valid_mail &&
-          <Text style={styles.red}>
-            Please Enter valid mail
-          </Text>
-        }
-        <FormInput
-          labelValue={data['phone']}
-          onChangeText={(userEmail) => { validate_phone(userEmail) }}
-          placeholderText="Phone"
-          keyboardType='numeric'
-          autoCapitalize="none"
-          autoCorrect={false}
-        >
-          <Image
-            source={icons.phone}
-            resizeMode="contain"
-            style={{
-              width: 25,
-              height: 25,
-              tintColor: Colors.primary
-            }}
-          />
-        </FormInput>
-        {!data.valid_phone &&
-          <Text style={styles.red}>
-            Phone no. should be 10 digit
-          </Text>
-        }
-        <View style={{
-          borderWidth: 1,
-          borderColor: '#ccc',
-          width: '100%',
-          height: 150,
-          padding: 16,
-          marginTop: 5,
-          borderRadius: 3,
-          marginBottom: 16,
-        }}>
-          <TextInput
-            placeholder='Write your message here'
-            placeholderTextColor={'#666'}
-            labelValue={data['msg']}
-            onChangeText={(val) => { validate_msg(val) }}
-            multiline
-            style={{
-              color: '#333',
-              fontSize: 16
-            }}
-          />
-        </View>
-        {!data.valid_msg &&
-          <Text style={styles.red}>
+        <ImageBackground
+          source={images.bg1}
+          resizeMode='cover'
+          style={{
+            width: '100%',
+            padding: 20,
+          }}>
+          <FormInput
+            labelValue={data.name}
+            onChangeText={(val) => { validate_name(val) }}
+            placeholderText="Name"
+            keyboardType="default"
+            autoCapitalize="none"
+            autoCorrect={false}
+          >
+            <Image
+              source={icons.name}
+              resizeMode="contain"
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: Colors.primary
+              }}
+            />
+          </FormInput>
+          {!data.valid_name && <Text style={styles.red}>
             This field is required
-          </Text>
-        }
-        <FormButton
-          buttonTitle={'Send'}
-          onPress={() => {
-            if (data.valid_mail && data.valid_msg && data.valid_name && data.valid_phone) {
-              send_email().then(() => {
-                showToastSuccess()
-                // console.log('Email sent sucessfully!')
-              })
-            } else {
-              showToastError()
-              // console.log('Please fill all reqd fields')
-            }
+          </Text>}
+          <FormInput
+            labelValue={data['mail']}
+            onChangeText={(userEmail) => { validate_mail(userEmail) }}
+            placeholderText="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+          >
+            <Image
+              source={icons.mail}
+              resizeMode="contain"
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: Colors.primary
+              }}
+            />
+          </FormInput>
+          {!data.valid_mail &&
+            <Text style={styles.red}>
+              Please Enter valid mail
+            </Text>
+          }
+          <FormInput
+            labelValue={data['phone']}
+            onChangeText={(userEmail) => { validate_phone(userEmail) }}
+            placeholderText="Phone"
+            keyboardType='numeric'
+            autoCapitalize="none"
+            autoCorrect={false}
+          >
+            <Image
+              source={icons.phone}
+              resizeMode="contain"
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: Colors.primary
+              }}
+            />
+          </FormInput>
+          {!data.valid_phone &&
+            <Text style={styles.red}>
+              Phone no. should be 10 digit
+            </Text>
+          }
+          <View style={{
+            borderWidth: 1,
+            borderColor: '#ccc',
+            width: '100%',
+            height: 150,
+            padding: 16,
+            marginTop: 5,
+            borderRadius: 3,
+            marginBottom: 16,
+            backgroundColor: 'white'
+          }}>
+            <TextInput
+              placeholder='Write your message here'
+              placeholderTextColor={'#666'}
+              labelValue={data['msg']}
+              onChangeText={(val) => { validate_msg(val) }}
+              multiline
+              style={{
+                color: '#333',
+                fontSize: 16
+              }}
+            />
+          </View>
+          {!data.valid_msg &&
+            <Text style={styles.red}>
+              This field is required
+            </Text>
+          }
+          <FormButton
+            buttonTitle={'Send'}
+            onPress={() => {
+              if (data.valid_mail && data.valid_msg && data.valid_name && data.valid_phone) {
+                send_email().then(() => {
+                  showToastSuccess()
+                  // console.log('Email sent sucessfully!')
+                })
+              } else {
+                showToastError()
+                // console.log('Please fill all reqd fields')
+              }
 
-          }}
-        />
+            }}
+          />
+        </ImageBackground>
+
 
       </ScrollView>
       <Toast />
